@@ -42,7 +42,7 @@ object GradientAscent:
     def oneStep(learningRate: Double)(b0: DVD): DVD =
       b0 + learningRate*gll(b0)
     def ascend(step: DVD => DVD, init: DVD, maxIts: Int = 10000,
-        tol: Double = 1e-8, verb: Boolean = true): DVD =
+        tol: Double = 1e-8, verb: Boolean = false): DVD =
       @tailrec def go(b0: DVD, ll0: Double, itsLeft: Int): DVD =
         if (verb)
           println(s"$itsLeft : $ll0")
@@ -57,10 +57,12 @@ object GradientAscent:
     println("Now run a simple gradient ascent algorithm")
     // Better choose a reasonable init as gradient ascent is terrible...
     val init = DenseVector(-9.8, 0.1, 0, 0, 0, 0, 1.8, 0)
-    val opt = ascend(oneStep(1e-6), init)
     println("Inits: " + init)
     println("Init ll: " + ll(init))
-    println("Opt: " + opt)
-    println("Opt ll: " + ll(opt))
+    for (i <- 1 to 1)
+      val opt = ascend(oneStep(i * 2e-6), init)
+      println(i + ": " + ll(opt))
+      println("Opt: " + opt)
+      println("Opt ll: " + ll(opt))
     println("Goodbye.")
 

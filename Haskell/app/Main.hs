@@ -79,7 +79,7 @@ main = do
   disp 2 x
   putStrLn "Now run the gradient ascent"
   -- choose reasonable init, since gradient ascent is terrible...
-  let init0 = fromList [-9.8, 0.1, 0, 0, 0, 0, 1.8, 0] :: Vector Double
+  let init0 = fromList [-9.8, 0.2, 0, 0, 0, 0, 1.8, 0] :: Vector Double
   print init0
   print $ ll x y init0
   let opt = ascend (oneStep x y 1.0e-6) init0 10000 1.0e-5
